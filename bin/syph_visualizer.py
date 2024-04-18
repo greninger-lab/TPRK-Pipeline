@@ -35,12 +35,6 @@ if __name__ == '__main__':
 	table = pd.read_csv(args.final_data,index_col=False)
 	source = ColumnDataSource(table)
 
-	#TOOLTIPS = [
-	#	("Read", "@Read"),
-	#	("Count", "@Count"),
-	#	("Relative Frequency", "@RelativeFreq"+"%"),
-	#]
-
 	plot_title = strain
 	output_path = args.output
 
