@@ -260,7 +260,7 @@ cd ..
 
 Run example workflow or use one from above
 ```
- NXF_VER=22.10.4 nextflow run main.nf --METADATA Metadata_Example_Illumina.csv --ILLUMINA --INPUT Example_Illumina_fastq/ --OUTDIR Example_Illumina/ -with-docker ubuntu:18.04 -profile Standard
+ NXF_VER=22.10.4 nextflow run greninger-lab/TPRK-Pipeline -r main --METADATA Metadata_Example_Illumina.csv --ILLUMINA --INPUT Example_Illumina_fastq/ --OUTDIR Example_Illumina/ -with-docker ubuntu:18.04 -profile Standard
 ```
 
 ### Pacbio
@@ -293,12 +293,6 @@ Add "PB_: to the front of all read names
 for file in *; do mv "$file" "PB_$file"; done
 ```
 
-gzip files
-
-``` Bash
-gzip *.fastq
-```
-
 Exit folder 
 ```bash
 cd ..
@@ -306,7 +300,7 @@ cd ..
 
 Run example workflow or use one from above
 ```
-NXF_VER=22.10.4  nextflow run main.nf --METADATA Metadata_Example_PACBIO.csv --PACBIO --INPUT Example_PacBio_fastq/ --OUTDIR Example_PACBIO_Out/ -with-docker ubuntu:18.04 -profile Standard
+NXF_VER=22.10.4  nextflow run greninger-lab/TPRK-Pipeline -r main --METADATA Metadata_Example_PACBIO.csv --PACBIO --INPUT Example_PacBio_fastq/ --OUTDIR Example_PACBIO_Out/ -with-docker ubuntu:18.04 -profile standard
 ```
 
 ## Output
