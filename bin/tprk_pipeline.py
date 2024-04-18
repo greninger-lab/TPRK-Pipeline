@@ -35,8 +35,6 @@ def filter_table(relative_freq_filter, count_filter, table, is_heatmap):
 			newline = line_parts[0] + "," + line_parts[1]
 			newline_hm = line_parts[0] + "," + line_parts[1]
 
-			# print(line_parts[1])
-
 			for index, part in enumerate(line_parts):
 				if (index != 0 and index != 1):
 					# For non-heatmap, we don't want to include parts that don't pass filters, even if there are other samples with the same read that do.
@@ -48,11 +46,8 @@ def filter_table(relative_freq_filter, count_filter, table, is_heatmap):
 								newline = newline + "," + line_parts[index - 1] + "," + part
 								relative_freq_check = True
 								count_check = True
-								# print(index)
-								# print(newline)
 							else:
 								newline = newline + ",NA,NA"
-								# print(newline)
 					# Heatmap only! Check if there are samples with the same read name that do have the read, in which case we keep the whole line.
 					# Even indexes should be relative frequencies
 					else:					
