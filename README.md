@@ -247,12 +247,6 @@ Add "Ill_: to the front of all read names
 for file in *; do mv "$file" "Ill_$file"; done
 ```
 
-gzip files
-
-``` Bash
-gzip *.fastq
-```
-
 Exit folder 
 ```bash
 cd ..
@@ -260,7 +254,7 @@ cd ..
 
 Run example workflow or use one from above
 ```
- NXF_VER=22.10.4 nextflow run greninger-lab/TPRK-Pipeline -r main --METADATA Metadata_Example_Illumina.csv --ILLUMINA --INPUT Example_Illumina_fastq/ --OUTDIR Example_Illumina/ -with-docker ubuntu:18.04 -profile Standard
+NXF_VER=22.10.4 nextflow run greninger-lab/TPRK-Pipeline -r main --METADATA Metadata_Example_Illumina.csv --ILLUMINA --INPUT Example_Illumina_fastq/ --OUTDIR Example_Illumina/ -with-docker ubuntu:18.04 -profile standard
 ```
 
 ### Pacbio
@@ -345,28 +339,28 @@ Pacbio Output
 Example_PACBIO_OUT
 ├── Figures
 │   ├── Relative_Frequency_Plots
-│   │   ├── PB_SRR10294238_RelativeFreqPlot.html
-│   │   ├── PB_SRR10294238_filtered_RelativeFreqPlot.html
+│   │   ├── PB_SRR10294238_RelativeFreqPlot.html                                # Bar chart comparing variability between variable sites
+│   │   ├── PB_SRR10294238_filtered_RelativeFreqPlot.html                       # Bar chart comparing variability between variable sites for each sample
 │   │   ├── PB_SRR10294254_RelativeFreqPlot.html
 │   │   └── PB_SRR10294254_filtered_RelativeFreqPlot.html
 │   └── Tree
-│       ├── Isolates_aa_filt_fullORFs.aln.aln.tree.nwk
-│       ├── Isolates_aa_filt_fullORFs.fasta
-│       ├── Isolates_aa_fullORFs.fasta
-│       ├── PacBio_Tree_Filtered.RData
-│       ├── PacBio_Tree_Filtered.pdf
-│       └── Table_allAAfilt_fullORFs.tsv
+│       ├── Isolates_aa_filt_fullORFs.aln.aln.tree.nwk                          # PacBio newick tree file
+│       ├── Isolates_aa_filt_fullORFs.fasta                                     # Fasta converted to AA filtered on RF cuttoff, default is identical to non filtered                                    
+│       ├── Isolates_aa_fullORFs.fasta                                          # Fasta converted to AA filtered on RF cuttoff
+│       ├── PacBio_Tree_Filtered.RData                                          # Pacbio tree R data
+│       ├── PacBio_Tree_Filtered.pdf                                            # Pacbio tree
+│       └── Table_allAAfilt_fullORFs.tsv                                        # Table of counts per sequence
 ├── Tables
 │   └── Frequency_Tables
-│       ├── PB_SRR10294238.noprimers.filtered.RAD.nolines.fix_final_data.csv
-│       ├── PB_SRR10294238.noprimers.filtered.RAD.nolines.fix_overcount_final_AA_data.csv
-│       ├── PB_SRR10294238.noprimers.filtered.RAD.nolines.fix_summary_statistics.csv
+│       ├── PB_SRR10294238.noprimers.filtered.RAD.nolines.fix_final_data.csv                # Counts and relative frequency of sequences for sample as nucleic acids
+│       ├── PB_SRR10294238.noprimers.filtered.RAD.nolines.fix_overcount_final_AA_data.csv   # Counts and relative frequency of sequences for sample as AA
+│       ├── PB_SRR10294238.noprimers.filtered.RAD.nolines.fix_summary_statistics.csv        # Counts per variable region
 │       ├── PB_SRR10294254.noprimers.filtered.RAD.nolines.fix_final_data.csv
 │       ├── PB_SRR10294254.noprimers.filtered.RAD.nolines.fix_overcount_final_AA_data.csv
 │       ├── PB_SRR10294254.noprimers.filtered.RAD.nolines.fix_summary_statistics.csv
-│       ├── all_assignments.csv
-│       └── compare_pacbio_df.csv
+│       ├── all_assignments.csv # All amino acids and nucleic acid sequences for samples
+│       └── compare_pacbio_df.csv # all reads csv with counts and frequency
 └── denoised_fastas
-    ├── PB_SRR10294238.noprimers.filtered.RAD.nolines.fix.fasta
+    ├── PB_SRR10294238.noprimers.filtered.RAD.nolines.fix.fasta                             # Denoised fasta for each sample
     └── PB_SRR10294254.noprimers.filtered.RAD.nolines.fix.fasta
 ```
