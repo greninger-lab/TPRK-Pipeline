@@ -10,7 +10,6 @@ from bokeh.palettes import brewer
 from bokeh.plotting import figure, show, output_file
 from bokeh.models import ColumnDataSource, LabelSet, ColorBar, BasicTicker, PrintfTickFormatter,HoverTool, LinearColorMapper, Slider, CustomJS, Label, WheelZoomTool, ResetTool, Button, TextInput
 from bokeh.models.widgets import Panel, Paragraph, Div
-#from bokeh.models.widgets import TabPanel, Paragraph, Div
 from bokeh.layouts import gridplot, column, layout, widgetbox, row
 from bokeh.transform import transform
 from math import pi
@@ -257,8 +256,6 @@ if __name__ == '__main__':
 
 	df = heatmap_df.drop('sum', axis=1)
 
-	#df = df.reindex(index=df.index[::-1])
-
 	metadata_file = args.metadata
 	source = ColumnDataSource(df)
 
@@ -272,8 +269,6 @@ if __name__ == '__main__':
 	for paired_samples in (metadata_file_lines):
 		if len(paired_samples.split(',')) == 5:
 			sample, illumina_sample, pacbio_sample, BioSample, Replicate = paired_samples.split(",")
-		#if len(paired_samples.split(',')) == 3:
-			#sample, illumina_sample, pacbio_sample = paired_samples.split(",")
 		if(sample!="SampleName"):
 			if(sample in sname for sname in first_row):
 				sample_list.append(sample)
@@ -285,7 +280,6 @@ if __name__ == '__main__':
 	variable_region_figs = []
 	variable_region_hms = []
 	df_columns = list(df)
-	#sample_list.sort()
 
 	# Drop PacBio columns
 	for column in df_columns:
@@ -315,7 +309,6 @@ if __name__ == '__main__':
 		hm_yaxis = []
 
 		if (args.large):
-			#fwidth = 1800
 			fwidth = 1800
 		else:
 			fwidth = 1500
@@ -346,10 +339,7 @@ if __name__ == '__main__':
 				sample_reads.append(read_seq)
 				data[read_seq] = sample_frequencies
 				color_num = color_num + 1
-		#print(sample_reads)
-		#print(data)
-		
-		#fig.vbar_stack(sample_reads, x = 'samples', width = 0.9, source=data,
+				
 		fig.vbar_stack(sample_reads, x = 'samples', width = 0.9, source=data,
 			fill_color=color_palette[0:len(sample_reads)], fill_alpha = 1, hover_alpha = 0.6,
 			hover_color = color_palette[0:len(sample_reads)], line_alpha = 0,
@@ -381,14 +371,11 @@ if __name__ == '__main__':
 			brew_pal = bupu
 		# Reverse the colors so darker colors at max
 		brew_pal = brew_pal[::-1]
-		#mapper = LinearColorMapper(palette=brew_pal, low=1, high=100, low_color = "#ffffff")
 		mapper = LinearColorMapper(palette=brew_pal, low=.25, high=100, low_color = "#ffffff")
 
 
 		# Set different scales of plot sizes for large datasets
 		if(args.large):
-			#pheight = (len(sample_reads)*15)
-			#pwidth = (len(sample_list)*18) + (len(max(sample_reads, key = len)) * 8)
 			pheight = (len(sample_reads)*30)
 			pwidth = (len(sample_list)*36) + (len(max(sample_reads, key = len)) * 16)
 		else:
@@ -397,11 +384,9 @@ if __name__ == '__main__':
 
 		hm = figure(
 			x_range=sample_list, y_range=sample_reads, title = variable_region,
-			toolbar_location = None, x_axis_location = "above", #background_fill_color = "#d3d3d3",
+			toolbar_location = None, x_axis_location = "above", 
 			plot_height = int(pheight),
 			plot_width = int(pwidth),
-			#aspect_scale = 1, match_aspect = True,
-			#sizing_mode = "scale_both",
 			min_border_right = 80,
 			min_border_bottom = 80,
 			y_axis_location = "left",
@@ -431,11 +416,6 @@ if __name__ == '__main__':
 			save(fig)
 
 	if args.svg:
-		# for myfig in variable_region_figs:
-		# 	myfig.output_backend = "svg"
-		# 	output_filename = myfig.title.text + ".svg"
-		# 	output_file(output_filename)
-		# 	export_svgs(myfig, filename=output_filename)
 		for myhm in variable_region_hms:
 			myhm.output_backend = "svg"
 			output_filename = myhm.title.text + "_heatmap.svg"
