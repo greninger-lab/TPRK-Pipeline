@@ -113,6 +113,9 @@ if (opt$pacbio == FALSE) {
     system(syphrIllumina_command)
   }
 
+  print("here1")
+    print(Illumina_file_name)
+
   print("Making Illumina comparison dataframe...")
 
   # Makes Illumina frequency comparison file
