@@ -53,8 +53,6 @@ if (ref_sample == FALSE && length(sample_names) > 1) {
 
   print(paste0("sample names", length(sample_names)))
 
-  # j <- 0
-
   for (i in 1:(length(sample_names) - 1)) {
     j <- i + 1
 
@@ -67,9 +65,7 @@ if (ref_sample == FALSE && length(sample_names) > 1) {
     print(paste("Generating figure for ", sample_names[i], " and ", sample_names[j], "...", sep = ""))
 
     rfcol <- paste("Ill_", sample_names[i], "_RelativeFreq", sep = "")
-    # print("i",i)
     rfcol2 <- paste("Ill_", sample_names[j], "_RelativeFreq", sep = "")
-    # print("j",j)
 
     commondfIllumina <- select(alldata, Region, Read, rfcol, rfcol2)
     commondfIllumina <- filter(commondfIllumina, !((commondfIllumina[[rfcol]] == 0) & (commondfIllumina[[rfcol2]] == 0)))
@@ -77,10 +73,6 @@ if (ref_sample == FALSE && length(sample_names) > 1) {
     sortedIllumina <- gather(sortedIllumina, rfcol, rfcol2, key = "Sample", value = "Frequency")
     sortedIllumina$Sample[sortedIllumina$Sample == rfcol] <- sample_names[i]
     sortedIllumina$Sample[sortedIllumina$Sample == rfcol2] <- sample_names[j]
-
-    # print(paste("Sorted Illumina Read =", sortedIllumina$Read))
-
-    # myColors <- distinctColorPalette(length(sortedIllumina$Read))
 
     myColors <- rainbow(length(sortedIllumina$Read))
 
@@ -99,9 +91,7 @@ if (ref_sample == FALSE && length(sample_names) > 1) {
       path = "./", plot = h1, width = 5, height = 4, units = "in"
     ))
   }
-
-
-  # print("I am here ")
+  
 } else if (ref_sample == TRUE) {
   foreach(j = 1:(length(sample_names))) %dopar% {
     if (sample_names[j] != ref_sample) {
