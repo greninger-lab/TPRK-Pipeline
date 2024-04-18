@@ -94,8 +94,7 @@ if (opt$illumina == FALSE) {
     compare_PacBio_df <- merge(compare_PacBio_df, pacbiodf, all = TRUE)
     compare_PacBio_df_out <- paste("compare_pacbio_df.csv", sep = "")
     write.csv(compare_PacBio_df, file = compare_PacBio_df_out, row.names = FALSE, quote = FALSE)
-    # assign(PacBio_freq_files[i], read.csv(PacBio_freq_files_fullpath[i],col.names = c("Region","Read",PacBioFreqtitle,PacBioCounttitle)))
-    # compare_PacBio_df <- merge(compare_PacBio_df,get(PacBio_freq_files[i]),all=TRUE)
+    
   }
 } else {
   print("Illumina option specified. Skipping making PacBio frequency files...")
