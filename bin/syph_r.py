@@ -103,7 +103,6 @@ def region_seq(read_seq, read_name, sample_name, is_pacbio, current_dir, num_inp
 		# Illumina reads are read as one read = one count. PacBio reads are assumed to be RAD, and counts are
 		# found after the underscore in the read name.
 		if is_pacbio==False:
-			# read_name = read_name.split('-')[0]
 			read_count = 1
 		# Includes the count in PacBio names after FAD/RAD, may be [1] or [2] depending on file
 		else:
@@ -218,7 +217,6 @@ def make_table(strain_name, current_dir):
 				str(((count / total) * 100)) + "," + str(count) + "\n")
 
 	# Filters out the lines with greater than 1% to a separate _final_data_fitered.csv.
-	#subprocess.call("awk -F\"[,|\\(]\" \'($3+0)>=1{print}\' " + strain_name + "_final_data.csv > " + strain_name + "_final_data_filtered.csv", shell=True)
 
 # Translates a string of nucleotides into amino acids.
 def translate_nucs(read_seq):
