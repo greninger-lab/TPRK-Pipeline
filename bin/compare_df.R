@@ -106,7 +106,7 @@ if (opt$pacbio == FALSE) {
 
   # Creates frequency files for Illumina (final_data.csvs). Parallelized.
   foreach(i = 1:length(Illumina_fns)) %dopar% {
-    Illumina_file_name <- paste("Ill_", sample_names, ".fastq")
+    Illumina_file_name <- paste("Ill_", sample_names[i], ".fastq")
     print(Illumina_file_name)
     syphrIllumina_command <- paste("python3 ", syph_path, " -i fastq -illumina -d . -s ", Illumina_file_name, sep = "")
     system(syphrIllumina_command)
