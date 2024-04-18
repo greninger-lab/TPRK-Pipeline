@@ -227,7 +227,7 @@ Cat R1 and R2 samples together
 for i in *_1.fastq
 do
 base=$(basename $i _1.fastq)
-cat ${base}_1.fastq.gz ${base}_2.fastq > ${base}.fastq
+cat ${base}_1.fastq ${base}_2.fastq > ${base}.fastq
 done
 ```
 
