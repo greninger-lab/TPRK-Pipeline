@@ -107,27 +107,15 @@ if (opt$pacbio == FALSE) {
   # Creates frequency files for Illumina (final_data.csvs). Parallelized.
   foreach(i = 1:length(Illumina_fns)) %dopar% {
     Illumina_file_name <- paste("Ill_", sample_names[i], ".fastq", sep = "")
-    print("here1")
-    print(Illumina_file_name)
     syphrIllumina_command <- paste("python3 ", syph_path, " -i fastq -illumina -d . -s ", Illumina_file_name, sep = "")
     system(syphrIllumina_command)
   }
-
-  print("here1")
-  print(Illumina_file_name)
-
   print("Making Illumina comparison dataframe...")
 
   # Makes Illumina frequency comparison file
   Illumina_freq_files <- list.files(Illumina_freq_path, pattern = "*_final_data.csv")
-  print("2")
-  print(Illumina_freq_files)
   Illumina_freq_files_fullpath <- list.files(Illumina_freq_path, pattern = "*_final_data.csv", full.names = T)
-  print(Illumina_freq_files_fullpath)
-  print("3")
   compare_Illumina_df <- data.frame(Region = character(), Read = character())
-  print(compare_Illumina_df)
-  print("4")
 
   # Renames columns to attach Ill_ and sample name onto relative frequency and count columns so we can mash everything
   # together into a big dataframe.
