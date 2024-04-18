@@ -49,8 +49,6 @@ for i in range(len(df.index)-1):
 
 df2.to_csv('less_than_5000_all_summary_stats.csv', index = False, header = True)
 
-#meta = pd.read_csv(args[2])
-
 df['Rep Ratio'] = ''
 
 sampleNum = int(len(meta.index))
