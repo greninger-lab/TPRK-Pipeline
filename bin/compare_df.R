@@ -116,8 +116,11 @@ if (opt$pacbio == FALSE) {
 
   # Makes Illumina frequency comparison file
   Illumina_freq_files <- list.files(Illumina_freq_path, pattern = "*_final_data.csv")
+  print(Illumina_freq_files)
   Illumina_freq_files_fullpath <- list.files(Illumina_freq_path, pattern = "*_final_data.csv", full.names = T)
+  print(Illumina_freq_files_fullpath)
   compare_Illumina_df <- data.frame(Region = character(), Read = character())
+  print(compare_Illumina_df)
 
   # Renames columns to attach Ill_ and sample name onto relative frequency and count columns so we can mash everything
   # together into a big dataframe.
