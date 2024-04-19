@@ -10,7 +10,7 @@ Fastqs much be gzipped for both Illumina and PacBio runs
 * [Installation](#Setup)
 * [Formating Metadata Table](#Metadata)
 * [WorkFlow](#WorkFlow)
-    * [Example Commands](#Example_Commands)
+    * [Example Commands](#Commands)
 * [Example](#Example)
     * [Illumina](#Illumina)
     * [Pacbio](#Pacbio)
@@ -107,7 +107,7 @@ A metadatafile is passed in to give sample names and locations.
 
 This pipeline can be run with both Illumina and PacBio samples at the same time skip --ILLUMINA and --PACBIO option and fill out the metadata table with both PacBio and Illumina samples, each sample must have a PacBio and an Illumina sample
 
-### Example Commands
+### Commands
 
 Illumina run in cloud:
 
