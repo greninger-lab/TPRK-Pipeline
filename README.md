@@ -21,8 +21,8 @@ Fastqs much be gzipped for both Illumina and PacBio runs
 
 1. Install [nextflow](https://www.nextflow.io/docs/latest/getstarted.html#installation).
    - Make sure you move nextflow to a directory in your PATH variable.
-2. Install [docker](https://docs.docker.com/get-docker/). The first time running this program will take a while, as the docker image will take some time to build, but this is a one time thing!
-3. Setup [nextflow tower](https://seqera.io/)
+2. Install [docker](https://docs.docker.com/get-docker/).
+3. If running on the cloud setup setup [nextflow tower](https://seqera.io/)
 
 > [!WARNING]
 This pipeline was written with DSL1 and must be run with an older version of nextflow before your nexflow run command use:
