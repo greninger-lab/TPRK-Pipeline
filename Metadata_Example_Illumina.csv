@@ -1,6 +1,6 @@
 ﻿SampleName,Illumina,PacBio
-SRR24317964,Example_Illumina_fastq/Ill_SRR24317964.fastq.gz
-SRR24317966,Example_Illumina_fastq/Ill_SRR24317966.fastq.gz
-SRR24317967,Example_Illumina_fastq/Ill_SRR24317967.fastq.gz
-SRR24317968,Example_Illumina_fastq/Ill_SRR24317968.fastq.gz
-SRR24317969,Example_Illumina_fastq/Ill_SRR24317969.fastq.gz
+SRR24317964,Example_Illumina_fastq/Ill_SRR24317964.fastq.gz,
+SRR24317966,Example_Illumina_fastq/Ill_SRR24317966.fastq.gz,
+SRR24317967,Example_Illumina_fastq/Ill_SRR24317967.fastq.gz,
+SRR24317968,Example_Illumina_fastq/Ill_SRR24317968.fastq.gz,
+SRR24317969,Example_Illumina_fastq/Ill_SRR24317969.fastq.gz,
