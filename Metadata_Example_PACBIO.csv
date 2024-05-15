@@ -1,4 +1,3 @@
-﻿SampleName,Illumina,PacBio,BioSample,Replicate
-SRR10294238,,Example_PacBio_fastq/PB_SRR10294238.fastq.gz,,
-SRR10294254,,Example_PacBio_fastq/PB_SRR10294254.fastq.gz,,
-
+﻿SampleName,Illumina,PacBio
+SRR10294238,,Example_PacBio_fastq/PB_SRR10294238.fastq.gz
+SRR10294254,,Example_PacBio_fastq/PB_SRR10294254.fastq.gz
