@@ -187,8 +187,8 @@ def helpMessage() {
                 container "cave42/denoise_pac"
 
                 // Retry on fail at most three times
-                //errorStrategy 'retry'
-                //maxRetries 0
+                errorStrategy 'retry':'ignore'
+                maxRetries 2
 
                 input:
                 tuple val(base), file(PACBIO_FILE) from input_pacbio_ch
