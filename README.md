@@ -38,8 +38,8 @@ A metadatafile is passed in to give sample names and locations.
 
 >For Illumina Runs add "Ill_" before the sample name for the fastq for the file and in the metadata
 
-|SampleName | Illumina | PacBio | BioSample | Replicate |
-| ---       |  ---     | ---    | ---       | ---       | 
+|SampleName | Illumina | PacBio |
+| ---       |  ---     | ---    |
 |Example_1	|Ill_Example_1.fastq.gz	|	
 |Example_2	|Ill_Example_2.fastq.gz	|
 |Example_3	|Ill_Example_3.fastq.gz	|		
@@ -51,8 +51,8 @@ A metadatafile is passed in to give sample names and locations.
 >[!WARNING]
 >For Pacbio runs a newline must be added to the end of the metadata file or you will receive an incomplete final line error for the createPacBioTree step.
 
-|SampleName | Illumina | PacBio | BioSample | Replicate |
-| ---       |  ---     | ---    | ---       | ---       | 
+|SampleName | Illumina | PacBio |
+| ---       |  ---     | ---    |
 |Example_1	||PB_Example_1.fastq.gz	|	
 |Example_2	||PB_Example_2.fastq.gz	|
 |Example_3	||PB_Example_3.fastq.gz	|		
@@ -63,22 +63,13 @@ A metadatafile is passed in to give sample names and locations.
 >[!IMPORTANT]
 >If running the fastqs in a specific directory the directory must be specified in the --INPUT option and in the metadata file. It is recommended to run the pipeline in the directory with your fastqs and pass "./" for --INPUT.
 
-|SampleName | Illumina | PacBio | BioSample | Replicate |
-| ---       |  ---     | ---    | ---       | ---       | 
+|SampleName | Illumina | PacBio |
+| ---       |  ---     | ---    |
 |Example_1	|Example_Directory/Ill_Example_1.fastq.gz	|	
 |Example_2	|Example_Directory/Ill_Example_2.fastq.gz	|
 |Example_3	|Example_Directory/Ill_Example_3.fastq.gz	|		
 |Example_4	|Example_Directory/Ill_Example_4.fastq.gz	|
 |Example_5	|Example_Directory/Ill_Example_5.fastq.gz	|
-
->For running with technical replicates name any replicates with the same biosample name in the biosample column but differentiate with A B for what replicate the sample is
-
-|SampleName | Illumina | PacBio | BioSample | Replicate |
-| ---       |  ---     | ---    | ---       | ---       | 
-|R501B1_R1_S5_merged|	Ill_R501B1_R1_S5_merged.fastq.gz||		KO_Time1_R501|	A
-|R501B1_R2_S13_merged|	Ill_R501B1_R2_S13_merged.fastq.gz||		KO_Time1_R501|	B
-|R501B2_R1_S21_merged|	Ill_R501B2_R1_S21_merged.fastq.gz||		KO_Time2_R501	|A
-|R501B2_R2_S29_merged|	Ill_R501B2_R2_S29_merged.fastq.gz||		KO_Time2_R501|	B
 
 ## Options
 
@@ -89,9 +80,7 @@ A metadatafile is passed in to give sample names and locations.
 | `--METADATA` | Path to metadata file with specific format. 
 | `--PACBIO` | Specify that there are only PacBio files to be read.
 | `--ILLUMINA` | Specify that there are only Illumina files to be read.
-| `--LARGE` | Splitting of visualizations will be done, heatmap and variable site comparison will produce a separate file for each variable region rather than combining them. Recommended for all runs as output is cleaner.
 | `--REFERENCE` | Specify Illumina sample name (not file), to compare others to for dot-line plots. Can be used in tandem with --LARGE.
-| `--TECHNICAL_REPLICATE` | Generates additional statistics if using technical replicates. 
 | `--RF_FILTER` | Specify relative frequency filter. Default is 0.00001.
 | `--COUNT_FILTER` | Specify count filter. Default is 0.
 | `--ILLUMINA_FILTER` | Specify whether PacBio reads should be filtered to only include files supported by Illumina reads that reach the cutoff.
@@ -112,7 +101,7 @@ This pipeline can be run with both Illumina and PacBio samples at the same time 
 Illumina run in cloud:
 
 ```
-NXF_VER=22.10.4 nextflow run main.nf  \
+NXF_VER=22.10.4 nextflow run greninger-lab/TPRK-Pipeline -r No_Visual  \
     --METADATA Metadata_Example_Illumina.csv \
     --ILLUMINA \
     --INPUT ./ \
@@ -126,7 +115,7 @@ NXF_VER=22.10.4 nextflow run main.nf  \
 Pacbio run in cloud:
 
 ```
-NXF_VER=22.10.4  nextflow run main.nf \
+NXF_VER=22.10.4  nextflow run greninger-lab/TPRK-Pipeline -r No_Visual \
     --METADATA Metadata_Example_PACBIO.csv \
     --PACBIO \
     --INPUT Example_PacBio_fastq/ \
@@ -140,7 +129,7 @@ NXF_VER=22.10.4  nextflow run main.nf \
 Illumina run local standard cpu usage:
 
 ```
-NXF_VER=22.10.4 nextflow run main.nf  \
+NXF_VER=22.10.4 nextflow run greninger-lab/TPRK-Pipeline -r No_Visual  \
     --METADATA Metadata_Example_Illumina.csv \
     --ILLUMINA \
     --INPUT ./ \
@@ -152,7 +141,7 @@ NXF_VER=22.10.4 nextflow run main.nf  \
 Pacbio run local higher cpu usage:
 
 ```
-NXF_VER=22.10.4  nextflow run main.nf \
+NXF_VER=22.10.4  nextflow run greninger-lab/TPRK-Pipeline -r No_Visual \
     --METADATA Metadata_Example_PACBIO.csv \
     --PACBIO \
     --INPUT Example_PacBio_fastq/ \
@@ -168,24 +157,15 @@ Default workflow for Illumina and Pacbio runs
 ```mermaid
 flowchart TD;
     subgraph  
-    visualizeAllData;
-    end
     subgraph Illumina;
     createAllAssignments-->createFrequencyTables_Illumina;
     createFrequencyTables_Illumina-->summaryStats_Illumina;
     summaryStats_Illumina-->filterReads;
     classDef bar stroke:#0f0
-    filterReads-->createFrequencyPlots_Illumina;
-    createFrequencyPlots_Illumina-->createVariableRegionComparisons;
-    createVariableRegionComparisons-->subsetReads;
-    subsetReads-->visualizeAllData:::bar;
     end;
     subgraph PacBio;
     denoisePacBioFiles-.->createFrequencyTables_PacBio;
     createFrequencyTables_PacBio-.->summaryStats_PacBio;
-    summaryStats_PacBio-.->createFrequencyPlots_PacBio;
-    createFrequencyPlots_PacBio-.->createPacBioTree;
-    createPacBioTree-.->visualizeAllData;
     end
 ```
 
@@ -254,7 +234,7 @@ cd ..
 
 Run example workflow or use one from above
 ```
-NXF_VER=22.10.4 nextflow run greninger-lab/TPRK-Pipeline -r main --METADATA Metadata_Example_Illumina.csv --ILLUMINA --INPUT Example_Illumina_fastq/ --OUTDIR Example_Illumina/ -with-docker ubuntu:18.04 -profile standard
+NXF_VER=22.10.4 nextflow run greninger-lab/TPRK-Pipeline -r No_Visual --METADATA Metadata_Example_Illumina.csv --ILLUMINA --INPUT Example_Illumina_fastq/ --OUTDIR Example_Illumina/ -with-docker ubuntu:18.04 -profile standard
 ```
 
 ### Pacbio
@@ -294,7 +274,7 @@ cd ..
 
 Run example workflow or use one from above
 ```
-NXF_VER=22.10.4  nextflow run greninger-lab/TPRK-Pipeline -r main --METADATA Metadata_Example_PACBIO.csv --PACBIO --INPUT Example_PacBio_fastq/ --OUTDIR Example_PACBIO_Out/ -with-docker ubuntu:18.04 -profile standard
+NXF_VER=22.10.4  nextflow run greninger-lab/TPRK-Pipeline -r No_Visual --METADATA Metadata_Example_PACBIO.csv --PACBIO --INPUT Example_PacBio_fastq/ --OUTDIR Example_PACBIO_Out/ -with-docker ubuntu:18.04 -profile standard
 ```
 
 ## Output
@@ -302,17 +282,6 @@ NXF_VER=22.10.4  nextflow run greninger-lab/TPRK-Pipeline -r main --METADATA Met
 Illumina Output
 ```
 Example_Illumina_Out
-├── Figures
-│   ├── Relative_Frequency_Plots
-│   │   ├── Ill_SRR24317964_RelativeFreqPlot.html                               # Bar chart comparing variability between variable sites for each sample 
-│   │   ├── Ill_SRR24317964_filtered_RelativeFreqPlot.html                      # Bar chart comparing variability between variable sites for each sample with filtering
-│   │   ├── Ill_SRR24317966_RelativeFreqPlot.html
-│   │   ├── Ill_SRR24317966_filtered_RelativeFreqPlot.html
-│   ├── Variable_Region_Comparisons
-│   │   ├── SRR24317964_vs_SRR24317966_VariableRegions_DotLine_Filtered.pdf     # Plot comparing variability of reads between samples 
-│   │   └── Variable_region_compare.RData                                       # R data to be loaded into R of variable region comparisons
-│   ├── all_heatmap.html                                                        # Heatmap of all variable region variability for all samples, will be separated by --large option
-│   └── all_variable_regions.html                                               # Barchart of all variable region variability for all samples, will be separated by --large option
 ├── Tables
 │   ├── Ill_SRR24317964_final_data.csv                                          # separated table of counts as nucleotide for each sample
 │   ├── Ill_SRR24317964_overcount_final_AA_data.csv                             # separated table of counts as amino acid for each sample
@@ -337,19 +306,6 @@ Pacbio Output
 
 ```
 Example_PACBIO_OUT
-├── Figures
-│   ├── Relative_Frequency_Plots
-│   │   ├── PB_SRR10294238_RelativeFreqPlot.html                                # Bar chart comparing variability between variable sites
-│   │   ├── PB_SRR10294238_filtered_RelativeFreqPlot.html                       # Bar chart comparing variability between variable sites for each sample
-│   │   ├── PB_SRR10294254_RelativeFreqPlot.html
-│   │   └── PB_SRR10294254_filtered_RelativeFreqPlot.html
-│   └── Tree
-│       ├── Isolates_aa_filt_fullORFs.aln.aln.tree.nwk                          # PacBio newick tree file
-│       ├── Isolates_aa_filt_fullORFs.fasta                                     # Fasta converted to AA filtered on RF cuttoff, default is identical to non filtered                                    
-│       ├── Isolates_aa_fullORFs.fasta                                          # Fasta converted to AA filtered on RF cuttoff
-│       ├── PacBio_Tree_Filtered.RData                                          # Pacbio tree R data
-│       ├── PacBio_Tree_Filtered.pdf                                            # Pacbio tree
-│       └── Table_allAAfilt_fullORFs.tsv                                        # Table of counts per sequence
 ├── Tables
 │   └── Frequency_Tables
 │       ├── PB_SRR10294238.noprimers.filtered.RAD.nolines.fix_final_data.csv                # Counts and relative frequency of sequences for sample as nucleic acids
