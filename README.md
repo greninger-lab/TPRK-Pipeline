@@ -112,7 +112,7 @@ This pipeline can be run with both Illumina and PacBio samples at the same time 
 Illumina run in cloud:
 
 ```
-NXF_VER=22.10.4 nextflow run main.nf  \
+NXF_VER=22.10.4 nextflow run greninger-lab/TPRK-Pipeline -r main \
     --METADATA Metadata_Example_Illumina.csv \
     --ILLUMINA \
     --INPUT ./ \
@@ -126,7 +126,7 @@ NXF_VER=22.10.4 nextflow run main.nf  \
 Pacbio run in cloud:
 
 ```
-NXF_VER=22.10.4  nextflow run main.nf \
+NXF_VER=22.10.4  nextflow run greninger-lab/TPRK-Pipeline -r main \
     --METADATA Metadata_Example_PACBIO.csv \
     --PACBIO \
     --INPUT Example_PacBio_fastq/ \
@@ -140,7 +140,7 @@ NXF_VER=22.10.4  nextflow run main.nf \
 Illumina run local standard cpu usage:
 
 ```
-NXF_VER=22.10.4 nextflow run main.nf  \
+NXF_VER=22.10.4 nextflow run greninger-lab/TPRK-Pipeline -r main \
     --METADATA Metadata_Example_Illumina.csv \
     --ILLUMINA \
     --INPUT ./ \
@@ -152,7 +152,7 @@ NXF_VER=22.10.4 nextflow run main.nf  \
 Pacbio run local higher cpu usage:
 
 ```
-NXF_VER=22.10.4  nextflow run main.nf \
+NXF_VER=22.10.4  nextflow run greninger-lab/TPRK-Pipeline -r main \
     --METADATA Metadata_Example_PACBIO.csv \
     --PACBIO \
     --INPUT Example_PacBio_fastq/ \
