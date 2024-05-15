@@ -156,12 +156,10 @@ Default workflow for Illumina and Pacbio runs
 
 ```mermaid
 flowchart TD;
-    subgraph  
     subgraph Illumina;
     createAllAssignments-->createFrequencyTables_Illumina;
     createFrequencyTables_Illumina-->summaryStats_Illumina;
     summaryStats_Illumina-->filterReads;
-    classDef bar stroke:#0f0
     end;
     subgraph PacBio;
     denoisePacBioFiles-.->createFrequencyTables_PacBio;
